@@ -104,6 +104,7 @@ p{line-height:1.7;color:var(--ink-soft);margin:0 0 1em;}
 .dropdown li a{color:var(--ink);padding:8px 12px;border-radius:8px;display:block;font-weight:500;}
 .dropdown li a:hover{background:var(--teal-light);color:var(--teal);}
 .nav-cta{padding:11px 22px;font-size:.88rem;}
+.dd-toggle{display:none;}
 
 .nav-toggle{display:none;}
 .nav-burger{display:none;}
@@ -118,13 +119,13 @@ p{line-height:1.7;color:var(--ink-soft);margin:0 0 1em;}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative;}
 .hero-copy h1{font-size:clamp(2.1rem,3.6vw,3.15rem);color:#fff;}
 .cred-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  margin:14px 0 4px;padding:7px 14px 7px 12px;
+  display:inline-flex;align-items:flex-start;gap:8px;
+  margin:14px 0 4px;padding:8px 14px;max-width:100%;
   background:rgba(28,124,130,.18);border:1px solid rgba(28,124,130,.45);
-  border-radius:99px;color:var(--teal-light);font-size:.78rem;font-weight:600;
-  letter-spacing:.01em;
+  border-radius:16px;color:var(--teal-light);font-size:.78rem;font-weight:600;
+  letter-spacing:.01em;line-height:1.4;
 }
-.cred-badge svg{flex-shrink:0;color:var(--amber);}
+.cred-badge svg{flex-shrink:0;color:var(--amber);margin-top:2px;}
 .hero-lead{color:#c9dbd9;font-size:1.05rem;max-width:520px;}
 
 /* rotating tagline */
@@ -646,12 +647,21 @@ p{line-height:1.7;color:var(--ink-soft);margin:0 0 1em;}
     position:fixed;inset:0 0 0 30%;top:0;background:var(--navy);
     flex-direction:column;align-items:flex-start;padding:100px 30px 30px;
     transform:translateX(100%);transition:.3s ease;z-index:60;
+    overflow-y:auto;
   }
   .main-nav ul{flex-direction:column;gap:6px;width:100%;}
-  .main-nav ul li{width:100%;}
+  .main-nav ul li{width:100%;position:relative;}
   .main-nav ul a{display:block;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);}
-  .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;background:rgba(255,255,255,.05);display:none;}
-  .has-drop:hover .dropdown{display:block;}
+  .has-drop > a{display:inline-block;border-bottom:none;padding-bottom:0;}
+  .has-drop{border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:6px;}
+  .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;background:rgba(255,255,255,.05);display:none;margin-top:6px;}
+  .has-drop.open .dropdown{display:block;}
+  .dd-toggle{
+    display:inline-flex;align-items:center;justify-content:center;
+    position:absolute;right:0;top:6px;width:40px;height:40px;
+    background:none;border:none;color:#fff;cursor:pointer;transition:transform .25s ease;
+  }
+  .has-drop.open .dd-toggle{transform:rotate(180deg);}
   .nav-cta{margin-top:20px;}
   .nav-burger{
     display:flex;flex-direction:column;justify-content:center;gap:5px;

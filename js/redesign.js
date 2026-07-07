@@ -17,7 +17,24 @@ document.querySelectorAll('.main-nav a').forEach(a=>{
   });
 });
 
-// highlight the specific "What We Do" card when reached via the dropdown
+// mobile dropdown toggle (What We Do / Resources)
+document.querySelectorAll('.dd-toggle').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    const li = btn.closest('.has-drop');
+    const isOpen = li.classList.contains('open');
+    document.querySelectorAll('.has-drop.open').forEach(el=>{
+      el.classList.remove('open');
+      const b = el.querySelector('.dd-toggle');
+      if(b) b.setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){
+      li.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
 function highlightServiceCard(hash){
   const id = (hash || location.hash).replace('#','');
   const validIds = ['wellness-workshops','hobby-workshops','getaways','career-coaching'];
